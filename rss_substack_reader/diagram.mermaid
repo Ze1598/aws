@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant EB as EventBridge Schedule
+    participant L as Lambda
+    participant RSS as RSS Feed
+    participant OR as OpenRouter
+    participant DB as DynamoDB
+    participant SNS as SNS Email
+
+    EB->>L: Trigger execution
+    L->>RSS: Fetch feed
+    RSS-->>L: Return feed data
+    L->>OR: Send request
+    OR-->>L: Return response
+    L->>DB: Write results
+    L->>SNS: Publish notification
