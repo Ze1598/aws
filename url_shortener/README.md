@@ -46,3 +46,21 @@ Receives a URL, generates a record for the DynamoDB table with a new shortcode a
 Receives the shortCode as a URL parameter, lookups the original URL in DynamoDB and redirects the user to it
 
 ![](api_gateway_endpoints_get.png)
+
+### Sample usage
+
+```bash
+curl -sS -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"url":"https://aws.amazon.com"}' \
+  https://<invoke-id>.execute-api.<region>.amazonaws.com/prod/shorten
+```
+
+Expected result
+```json
+{"shortUrl":"https://<invoke-id>.execute-api.<region>.amazonaws.com/prod/Ab12Cd","code":"Ab12Cd"}
+```
+
+```bash
+curl -I https://<invoke-id>.execute-api.<region>.amazonaws.com/prod/<code>
+```
